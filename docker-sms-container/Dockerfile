@@ -4,4 +4,4 @@ COPY . .
 RUN pip3 install clx-sdk-xms
 RUN pip3 install pika
 CMD ["consumidorrabbitmq.py"]
-ENTRYPOINT [ "python3" ]
+ENTRYPOINT ["python3"]
