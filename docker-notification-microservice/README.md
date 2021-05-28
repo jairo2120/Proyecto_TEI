@@ -1,8 +1,13 @@
-# README.md Microservicio de notificaciones  
+# README.md NOTIFICATION MICROSERVICE
 
-Este microservicio sirve para notificar a los usuarios por medio de canales como email 
-y sms, cabe recalcar que a futuro se le puede integrar mas canales. 
+This microservice serves to notify users through channels such as email and sms. 
+and sms, it should be noted that more channels can be integrated in the future. 
 
-# DIAGRAMAS 
+# DIAGRAMS
 
 ![](diagrams/notification_microservice.jpg)
+
+# ARCHIVOS 
+*  code 
+* configuration 
+* diagrams  
