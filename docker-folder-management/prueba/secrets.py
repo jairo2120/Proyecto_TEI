@@ -1,0 +1,2 @@
+access_key = 'AKIA6CB3TLHF7EN2SRPA'
+secret_access_key = '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'
