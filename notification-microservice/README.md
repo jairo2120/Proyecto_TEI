@@ -15,6 +15,6 @@ and sms, it should be noted that more channels can be integrated in the future.
     * sms_adapter.py #sms adapter 
 * configuration 
     * Dockerfile #To build the microservice image
-    * environment_variable.env  #Para configurar las variables de entorno 
+    * environment_variable.env  #To set environment variables
 * diagrams  
 
