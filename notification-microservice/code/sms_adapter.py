@@ -1,8 +1,12 @@
 import clx.xms #proyecto123*
 import requests 
 import json  
+import os
+
+your_service_plan_id = os.getenv('SERVICE_PLAN_ID')
+your_token = os.getenv('TOKEN') 
 def sms_adapter(phone,message):
-    client = clx.xms.Client(service_plan_id=SERVICE_PLAN_ID,token=TOKEN) #SERVICE_PLAN_ID #TOKEN
+    client = clx.xms.Client(service_plan_id=your_service_plan_id,token=your_token) #SERVICE_PLAN_ID #TOKEN
     create = clx.xms.api.MtBatchTextSmsCreate()
     create.sender = phone
     create.recipients = {phone}
