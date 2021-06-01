@@ -1,8 +1,8 @@
 import boto3 
-
-aws_access_key_id = AWS_ACCESS_KEY_ID
-aws_secret_access_key = AWS_SECRET_ACCESS_KEY
-aws_bucket_project = BUCKET_PROJECT
+import os
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+aws_bucket_project = os.getenv('BUCKET_PROJECT')
 client = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)  
 
 

@@ -1,5 +1,9 @@
 from flask import Flask, jsonify, request
 from folder_adapter import *
+import os
+
+your_host = os.getenv('HOST')
+your_port = os.getenv('PORT') 
 
 app = Flask(__name__)
 
@@ -54,4 +58,4 @@ def share_or_copy_user_file():
     share_or_copy_file(id_user_source,id_user_destination,path_s3_source,path_s3_destination)
     return id_user_source
 if __name__ == '__main__':
-    app.run(debug=True, port=4000)
+    app.run(debug=True,host=your_host,port=your_port)
