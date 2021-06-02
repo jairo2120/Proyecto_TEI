@@ -17,3 +17,4 @@ RUN pip3 install -r requirements.txt
 
 CMD ["code/folder_manager.py"]
 ENTRYPOINT [ "python3" ]
+
