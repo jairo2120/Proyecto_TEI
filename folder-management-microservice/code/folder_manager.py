@@ -5,12 +5,11 @@ import json
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
-# your_host = os.getenv('HOST')
-# your_port = os.getenv('PORT') 
+your_host = os.getenv('HOST')
+your_port = os.getenv('PORT') 
 
 app = Flask(__name__)
 
-id 
 
 @app.route('/citizen_folder/user', methods=['POST'])
 def create_root_user_folder():
@@ -66,4 +65,4 @@ def share_or_copy_user_file():
     share_or_copy_file(id_user_source,id_user_destination,path_s3_source,path_s3_destination)
     return id_user_source
 if __name__ == '__main__':
-    app.run(debug=True,port=4000)
+    app.run(debug=True,host=your_host,port=your_port)
