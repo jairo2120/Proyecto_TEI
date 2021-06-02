@@ -47,7 +47,7 @@ def upload_user_file():
     path_local = user_data['path_local']
     upload_file(user_id,file_name,path_s3,path_local)
     os.remove(str(os.path.realpath("."))+"/"+str(path_local)+"/"+str(file_name))
-    return (jsonify({"1":user_id,"2":file_name,"3":path_local,"4":path_s3}))
+    return (jsonify({"user_id":user_id,"file_name":file_name,"path_local":path_local,"path_s3":path_s3}))
 
 @app.route('/citizen_folder/folder',methods=["DELETE"])
 def delete_user_file(): 
