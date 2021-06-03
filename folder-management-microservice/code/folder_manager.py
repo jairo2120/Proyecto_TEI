@@ -5,8 +5,8 @@ import json
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
-# your_host = os.getenv('HOST')
-# your_port = os.getenv('PORT') 
+your_host = os.getenv('HOST')
+your_port = os.getenv('PORT') 
 
 app = Flask(__name__)
 
@@ -90,4 +90,4 @@ def share_or_copy_user_file():
         return (jsonify({"error":str(e)}))
     
 if __name__ == '__main__':
-    app.run(debug=True,port=4000) #host=your_host
+    app.run(debug=True,host=your_host,port=your_port) #host=your_host
