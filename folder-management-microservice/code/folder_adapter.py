@@ -1,8 +1,8 @@
 import boto3 
 import os
-aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
-aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-aws_bucket_project = os.getenv('BUCKET_PROJECT')
+aws_access_key_id = 'AKIA6CB3TLHF7EN2SRPA' #os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = '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' #os.getenv('AWS_SECRET_ACCESS_KEY')
+aws_bucket_project = 'tei-bucket-eafit' #os.getenv('BUCKET_PROJECT')
 
 client = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key= aws_secret_access_key)  
 
@@ -11,16 +11,16 @@ client = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_acce
 
 def create_root_folder(id_user): 
     client.upload_file(
-        "/usr/src/folder_management_microservice/code/bienvenida.txt", #"bienvenida.txt", 
+        "bienvenida.txt", #"/usr/src/folder_management_microservice/code/bienvenida.txt", , 
         aws_bucket_project,
         str(id_user)+"/bienvenida.txt"
     )
     
 def create_folder(id_user,name,path_s3):
     client.upload_file(
-        "/usr/src/folder_management_microservice/code/bienvenida.txt]",  #"bienvenida.txt", 
+        "bienvenida.txt", #"/usr/src/folder_management_microservice/code/bienvenida.txt]",  
         aws_bucket_project,
-        str(id_user)+"/"+str(name)+"/bienvenida.txt"
+        str(id_user)+"/"+str(path_s3)+"/"+str(name)+"/"+"bienvenida.txt"
     )    
 
 
@@ -28,7 +28,7 @@ def upload_file(id_user,file_name, path_s3, path_local):
     client.upload_file(
         str(path_local)+str(file_name),
         aws_bucket_project,
-        str(id_user)+"/"+str(path_s3)+str(file_name )
+        str(id_user)+str(path_s3)+str(file_name )
     ) #BUCKET_PROJECT
         
 def download_file(id_user,file_name, path_s3, path_local): 
@@ -40,8 +40,8 @@ def download_file(id_user,file_name, path_s3, path_local):
 
 def delete_file(id_user,file_name, path_s3): 
     client.delete_object(
-        Bucket=aws_bucket_project,
-        Key=str(id_user)+"/"+str(path_s3)+file_name
+    Bucket=aws_bucket_project,
+    Key=str(id_user)+"/"+str(path_s3)+file_name
     )
 
 def list_directory(id_user):
