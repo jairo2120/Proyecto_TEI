@@ -8,7 +8,7 @@ import mysql
 import os
 
 your_host = os.getenv('YOUR_HOST')
-your_port = os.getenv('YOUR_PORT')  
+your_port = os.getenv('YOUR_PORT')
 
 #verificacion usuario
 @app.route('/users/<int:id>')

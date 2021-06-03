@@ -14,10 +14,10 @@ def getCitizen(id_num):
 
 def registerCitizen(new_user):
     url = 'https://govcarpetaapp.mybluemix.net/apis/registerCitizen'
-    
+
     data = json.dumps(new_user)
     headers = {"Content-Type":"application/json; charset=UTF-8"}
-    
+
     req = urllib.request.Request(url, data = bytes(data.encode("utf-8")), headers=headers)
     resp = urllib.request.urlopen(req)
     sendSMS(new_user['email'], new_user['telephone'])
@@ -41,4 +41,5 @@ def senderrorSMS(email, telephone):
     print(" [x] Sent 'Hello World...!'")
     connection.close()
 
-        
+
+

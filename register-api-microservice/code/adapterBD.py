@@ -34,7 +34,7 @@ def consultarUser(user):
     res = mycursor.fetchall()
     temp = False
     for x in res:
-        
+
         if user in x:
             temp = True
     return temp
@@ -72,3 +72,4 @@ def loginUser(user, password):
 # mycursor.execute(sql, val)
 # mydb.commit()
 # print(mycursor.rowcount, 'Record inserted')
+
