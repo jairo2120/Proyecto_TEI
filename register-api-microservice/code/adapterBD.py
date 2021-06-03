@@ -16,20 +16,20 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor(buffered=True)
 
-def addnewUser(id_num, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName):
+#registrar usuario nuevo en la bd de nuestro operador
+def addnewUser(id_num, password, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName):
     print(id_num)
     temp = False
-    sql = "INSERT INTO usergovcarpeta (id, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO carpeta_operador (id, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     val = (id_num, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName)
     mycursor.execute(sql, val)
     mydb.commit()
     temp = True
     return temp
 
-
+#consultar la existencia de un usuario en la bd de nuestro operador
 def consultarUser(user):
-    
-    sql = "SELECT id FROM `usergovcarpeta`"
+    sql = "SELECT id FROM `carpeta_operador`"
     mycursor.execute(sql)
     res = mycursor.fetchall()
     temp = False
@@ -37,6 +37,25 @@ def consultarUser(user):
         
         if user in x:
             temp = True
+    return temp
+
+def loginUser(user, password):
+    sql = "SELECT id FROM `carpeta_operador`"
+    mycursor.execute(sql)
+    res = mycursor.fetchall()
+    temp = False
+    for x in res:
+        if user in x:
+            temp = True
+    
+    sql= "SELECT password FROM `carpeta_operador`"
+    mycursor.execute(sql)
+    res = mycursor.fetchall()
+    for x in res:
+        if password in x:
+            temp = True
+        else:
+            temp = False
     return temp
 
     # mycursor.execute(sql,val)

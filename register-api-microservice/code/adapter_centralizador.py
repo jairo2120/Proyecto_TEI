@@ -1,22 +1,13 @@
 from flask import Flask, jsonify, request
-from users import users
 import urllib.request, urllib.parse, json
 import pika
 import os
-your_server_ip = os.getenv()
-your_server_port = os.getenv()
-your_server_user = os.getenv()
-your_server_password = os.getenv()
-
-
-def getDoc(id, UrlDocument, documentTitle):
-    verifyDoc = 'govcarpetaapp.mybluemix.net/apis/'+str(id)+'/'+str(UrlDocument)+'/'+str(documentTitle)
-    response = urllib.request.urlopen(verifyDoc)
-    return response.read()
-    return requests.get(verifyDoc).content
+your_server_ip = os.getenv('SERVER_IP')
+your_server_port = os.getenv('SERVER_PORT')
+your_server_user = os.getenv('SERVER_USER')
+your_server_password = os.getenv('SERVER_PASSWORD')
 
 def getCitizen(id_num):
-    #userFound = [user for user in users if user["id_num"] == id_num]
     verifyCitizen = 'https://govcarpetaapp.mybluemix.net/apis/validateCitizen/'+str(id_num)
     response = urllib.request.urlopen(verifyCitizen)
     return response.read()
