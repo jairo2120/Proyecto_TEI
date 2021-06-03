@@ -19,7 +19,7 @@ mycursor = mydb.cursor(buffered=True)
 def addnewUser(id_num, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName):
     print(id_num)
     temp = False
-    sql = "INSERT INTO usergovcarpeta (id, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO userGovCarpeta (id, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     val = (id_num, id_type, name, address, email, telephone, bool_emp, operatorID, operatorName)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -28,13 +28,13 @@ def addnewUser(id_num, id_type, name, address, email, telephone, bool_emp, opera
 
 
 def consultarUser(user):
-    
-    sql = "SELECT id FROM `usergovcarpeta`"
+
+    sql = "SELECT id FROM `userGovCarpeta`"
     mycursor.execute(sql)
     res = mycursor.fetchall()
     temp = False
     for x in res:
-        
+
         if user in x:
             temp = True
     return temp
@@ -53,3 +53,4 @@ def consultarUser(user):
 # mycursor.execute(sql, val)
 # mydb.commit()
 # print(mycursor.rowcount, 'Record inserted')
+

@@ -1,12 +1,11 @@
 from flask import Flask, jsonify, request
-from users import users
 import urllib.request, urllib.parse, json
 import pika
 import os
-your_server_ip = os.getenv()
-your_server_port = os.getenv()
-your_server_user = os.getenv()
-your_server_password = os.getenv()
+your_server_ip = os.getenv('SERVER_IP')
+your_server_port = os.getenv('SERVER_PORT')
+your_server_user = os.getenv('SERVER_USER')
+your_server_password = os.getenv('SERVER_PASSWORD')
 
 
 def getDoc(id, UrlDocument, documentTitle):
@@ -23,10 +22,10 @@ def getCitizen(id_num):
 
 def registerCitizen(new_user):
     url = 'https://govcarpetaapp.mybluemix.net/apis/registerCitizen'
-    
+
     data = json.dumps(new_user)
     headers = {"Content-Type":"application/json; charset=UTF-8"}
-    
+
     req = urllib.request.Request(url, data = bytes(data.encode("utf-8")), headers=headers)
     resp = urllib.request.urlopen(req)
     sendSMS(new_user['email'], new_user['telephone'])
@@ -50,4 +49,5 @@ def senderrorSMS(email, telephone):
     print(" [x] Sent 'Hello World...!'")
     connection.close()
 
-        
+
+

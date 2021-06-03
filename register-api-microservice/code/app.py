@@ -2,14 +2,13 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-from users import users
 from adapterBD import addnewUser, consultarUser
-from adapter_centralizador import getCitizen, getDoc, registerCitizen
-import mysql 
+from adapter_centralizador import getCitizen, getDoc, registerCitizen, senderrorSMS
+import mysql
 import os
 
 your_host = os.getenv('YOUR_HOST')
-your_port = os.getenv('YOUR_PORT')  
+your_port = os.getenv('YOUR_PORT')
 
 @app.route('/users/<int:id>')
 def getUser(id):
@@ -18,7 +17,7 @@ def getUser(id):
     if getCitizen(id) == b'':
         return jsonify({"message": "User not found"})
     else:
-        consultarUser(id)
+        #consultarUser(id)
         return getCitizen(id)
 
 @app.route('/users/addCitizen', methods=['POST'])
@@ -35,12 +34,12 @@ def addUser():
         "operatorName": request.json['operatorName']
     }
     if getCitizen(new_user['id']) == b'':
-        try:            
-            
+        try:
+
             if addnewUser(
-                new_user['id'], 
-                new_user['id_type'], 
-                new_user['name'], 
+                new_user['id'],
+                new_user['id_type'],
+                new_user['name'],
                 new_user['address'],
                 new_user['email'],
                 new_user['telephone'],
@@ -55,7 +54,7 @@ def addUser():
     else:
         senderrorSMS(new_user['email'], new_user('telephone'))
         return getCitizen(id)
-    
+
 @app.route('/users/login/<int:id>')
 def login(id):
     #return getCitizen(id)
