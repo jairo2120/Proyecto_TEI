@@ -96,7 +96,7 @@ def share_or_copy_user_file():
     except Exception as e: 
         return (jsonify({"error":str(e)}))
 
-@app.route('/citizen_folder/folder/dowload', methods=['GET'])
+@app.route('/citizen_folder/folder/download', methods=['GET'])
 def dowload_user_file():
     shutil.rmtree('prueba', ignore_errors=True)
     os.mkdir("prueba")
