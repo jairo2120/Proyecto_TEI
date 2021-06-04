@@ -1,12 +1,13 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from folder_adapter import *
 import os
 import json
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
+import shutil
 
-# your_host = os.getenv('HOST')
-# your_port = os.getenv('PORT') 
+your_host = os.getenv('HOST')
+your_port = os.getenv('PORT') 
 
 app = Flask(__name__)
 
@@ -72,8 +73,11 @@ def delete_user_file():
         user_id = request.json['id_user']
         file_name = request.json['file_name']
         path_s3 = request.json['path_s3']
-        delete_file(user_id,file_name,path_s3)
-        return "ok!"
+        if(user_id and file_name) == "":
+            delete_file(user_id,file_name,path_s3)
+            return "ok!"
+        else:
+            return(jsonify({"menssage":"missing some parameter"}))
     except Exception as e: 
         return (jsonify({"error":str(e)}))
 
@@ -84,10 +88,30 @@ def share_or_copy_user_file():
         id_user_destination = request.json['id_user_destination']
         path_s3_source = request.json['path_s3_source']
         path_s3_destination = request.json['path_s3_destination']
-        share_or_copy_file(id_user_source,id_user_destination,path_s3_source,path_s3_destination)
-        return id_user_source
+        if(id_user_source and id_user_destination and path_s3_source and path_s3_destination) != "":
+            share_or_copy_file(id_user_source,id_user_destination,path_s3_source,path_s3_destination)
+            return (jsonify({"mensaje":"ok!"}))
+        else:
+            return(jsonify({"menssage":"missing some parameter"}))
+    except Exception as e: 
+        return (jsonify({"error":str(e)}))
+
+@app.route('/citizen_folder/folder/download', methods=['GET'])
+def dowload_user_file():
+    shutil.rmtree('prueba', ignore_errors=True)
+    os.mkdir("prueba")
+    try:                                                                                              
+        user_id = request.args.get('id_user')
+        file_name = request.args.get('file_name')
+        path_s3 = request.args.get('path_s3')
+        path_local = request.args.get('path_local')
+        if (user_id and file_name) != "":
+            download_file(user_id,file_name,path_s3,path_local)
+            return send_from_directory("prueba/", str(path_local)+str(file_name), as_attachment=True)
+        return(jsonify({"menssage":"missing some parameter"}))
     except Exception as e: 
         return (jsonify({"error":str(e)}))
     
+
 if __name__ == '__main__':
-    app.run(debug=True,port=4000) #host=your_host
+    app.run(debug=True,host=your_host,port=your_port) #host=your_host
